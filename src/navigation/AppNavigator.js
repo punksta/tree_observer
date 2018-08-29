@@ -8,13 +8,14 @@ export default (AppNavigator = createStackNavigator(
 		TreeObserverScreen: {
 			screen: TreeObserverScreen,
 			navigationOptions: ({navigation}) => ({
-				title: "sample",
-				header: null,
-				params: {}
+				title: navigation?.state?.params?.title || "Root"
 			})
 		}
 	},
 	{
-		cardStyle: {backgroundColor: "transparent"}
+		cardStyle: {backgroundColor: "transparent"},
+		initialRouteParams: {
+			currentPath: []
+		}
 	}
 ));

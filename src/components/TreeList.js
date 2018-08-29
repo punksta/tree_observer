@@ -1,28 +1,55 @@
 import * as React from "react";
-import {Text, View, VirtualizedList} from "react-native";
+import {
+	Text,
+	View,
+	VirtualizedList,
+	StyleSheet,
+	TouchableOpacity
+} from "react-native";
 
 import {pure, onlyUpdateForKeys} from "recompose";
 import {List} from "immutable";
+import {getTreeSize, getSubTreeByIndex} from "../model/Tree";
 
-const renderNode_ = ({item}) => <Text>{item.get("title")}</Text>;
+const renderNode_ = ({item, onPress}) => (
+	<TouchableOpacity
+		onPress={onPress.bind(null, item)}
+		style={{
+			paddingHorizontal: 16,
+			paddingVertical: 16,
+			borderBottomColor: "black",
+			borderBottomWidth: StyleSheet.hairlineWidth
+		}}
+	>
+		<Text
+			style={{
+				fontSize: 16
+			}}
+		>
+			{item.get("title")}
+		</Text>
+	</TouchableOpacity>
+);
 const RenderNode = onlyUpdateForKeys(["item"])(renderNode_);
 
 const getItem = (t, index) => {
-	return t.get("nodes").get(index.toString());
+	return getSubTreeByIndex(t, index);
 };
 
 const getItemCount = t => {
-	return t.get("nodes").size;
+	return getTreeSize(t);
 };
 
-const TreeList = ({tree, ...rest}) => (
+const TreeList = ({tree, onItemPress, ...rest}) => (
 	<VirtualizedList
 		{...rest}
-		keyExtractor={(item, index) => `${item.title}-${index}`} // todo: read real id from tree
+		keyExtractor={(item, index) => item.get("key")}
 		data={tree}
 		getItem={getItem}
 		getItemCount={getItemCount}
-		renderItem={({item}) => <RenderNode item={item} />}
+		renderItem={({item, index}) => (
+			<RenderNode item={item} onPress={onItemPress} />
+		)}
 	/>
 );
 

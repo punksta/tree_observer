@@ -11,7 +11,7 @@ import {async as asyncScheduler} from "rxjs/scheduler/async";
 
 import "rxjs/add/observable/empty";
 
-import {NavigationActions} from "react-navigation";
+import {NavigationActions, StackActions} from "react-navigation";
 
 export const navigation = (action$, {getState}, {navigationService}) => {
 	return action$
@@ -21,10 +21,11 @@ export const navigation = (action$, {getState}, {navigationService}) => {
 		.map(a => {
 			switch (a.type) {
 				case "ON_NAVIGATE_DEEPER_CLICK":
-					return NavigationActions.navigate({
+					return StackActions.push({
 						routeName: "TreeObserverScreen",
 						params: {
-							currentPath: a.newPath
+							currentPath: a.newPath,
+							title: a.title
 						}
 					});
 
