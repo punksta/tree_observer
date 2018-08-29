@@ -15,14 +15,17 @@ import {NavigationActions} from "react-navigation";
 
 export const navigation = (action$, {getState}, {navigationService}) => {
 	return action$
-		.ofType("NAVIGATION_SAMPLE")
+		.ofType("ON_NAVIGATE_DEEPER_CLICK")
 		.observeOn(asyncScheduler)
 		.throttleTime(500)
 		.map(a => {
 			switch (a.type) {
-				case "NAVIGATION_SAMPLE_1":
+				case "ON_NAVIGATE_DEEPER_CLICK":
 					return NavigationActions.navigate({
-						routeName: "Screen1"
+						routeName: "TreeObserverScreen",
+						params: {
+							currentPath: a.newPath
+						}
 					});
 
 				default:

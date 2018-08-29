@@ -12,17 +12,18 @@ import AppNavigator from "./navigation/AppNavigator";
 import {createEpicMiddleware} from "redux-observable";
 import rootEpic from "./epics";
 import {isDebug} from "./utils/debugUtils";
+import treeSate from "./reducers/treeState";
 
 export default navigationService => {
 	const persistConfig = {
 		key: "rootReducer",
 		storage,
-		whitelist: ["sampleReducer"],
+		whitelist: [""],
 		version: 1
 	};
 
 	const appReducer = persistCombineReducers(persistConfig, {
-		sampleReducer
+		treeSate
 	});
 
 	const persistedReducer = appReducer;

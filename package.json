@@ -25,6 +25,7 @@
     "react-native-popup-dialog": "^0.15.0",
     "react-native-reanimated": "^1.0.0-alpha.6",
     "react-navigation": "^2.6.0",
+    "immutable": "^3.8.2",
     "react-redux": "^5.0.7",
     "recompose": "^0.27.1",
     "redux": "^4.0.0",
@@ -38,11 +39,14 @@
     "babel-jest": "23.0.1",
     "babel-preset-react-native": "5.0.2",
     "flow-bin": "^0.75.0",
-    "jest": "23.0.1",
+    "jest": "^23.2.0",
     "prettier": "^1.13.7",
     "react-test-renderer": "16.3.1"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+    }
   }
 }

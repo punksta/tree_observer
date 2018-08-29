@@ -1,15 +1,16 @@
 import React from "react";
 import {createStackNavigator, createSwitchNavigator} from "react-navigation";
 import {Text} from "react-native";
-import ContainerSample from "../containers/ContainerSample";
+import TreeObserverScreen from "../containers/TreeObserverScreen";
 
 export default (AppNavigator = createStackNavigator(
 	{
-		MainScreen: {
-			screen: ContainerSample,
+		TreeObserverScreen: {
+			screen: TreeObserverScreen,
 			navigationOptions: ({navigation}) => ({
 				title: "sample",
-				header: null
+				header: null,
+				params: {}
 			})
 		}
 	},
